@@ -1,0 +1,98 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Author {
+  author_id          Int       @id @default(autoincrement())
+  author_name        String    @db.VarChar(50)
+  author_nationality String?   @db.VarChar(25)
+  author_birthdate   DateTime?   
+  author_field       String?   @db.VarChar(25)
+  Book               Book[]
+}
+
+model Book {
+  book_id          Int         @id @default(autoincrement())
+  author_id        Int
+  book_title       String      @db.VarChar(100)
+  publishing_year  Int?     
+  pages_number     Int?
+  publishing_house String?     @db.VarChar(50)
+  about_book       String?     @db.VarChar(255)
+  category         String?     @db.VarChar(25)
+  copys_number     Int?
+  book_cover       String?     @db.VarChar(255)
+  Author           Author      @relation(fields: [author_id], references: [author_id], onDelete: Cascade, map: "auther_id_fk")
+  Book_copy        Book_copy[]
+
+  @@index([author_id], map: "auther_id_fk")
+}
+
+model Book_copy {
+  copy_id Int       @id
+  book_id Int
+  Book    Book      @relation(fields: [book_id], references: [book_id], onDelete: Cascade, map: "book_id_fk")
+  Lending Lending[]
+
+  @@index([book_id], map: "book_id_fk")
+}
+
+model Bookmarks {
+  user_id     Int
+  book_id     Int
+  bookmark_id Int @unique(map: "bookmark_id") @default(autoincrement())
+
+  @@id([user_id, book_id])
+}
+
+model Lending {
+  copy_id            Int
+  user_id            Int
+  lending_id         Int          @id @default(autoincrement())
+  lending_start_date DateTime   @default(now()) @db.Timestamp(0)
+  return_date        DateTime    @db.Timestamp(0)
+  landing_status     Boolean       @default(true)
+  Book_copy          Book_copy    @relation(fields: [copy_id], references: [copy_id], onDelete: NoAction, onUpdate: NoAction, map: "copy_id_fk")
+  User               User         @relation(fields: [user_id], references: [user_id], onDelete: Cascade, map: "user_id_fk")
+  Punishment         Punishment[]
+
+  @@index([copy_id], map: "copy_id_fk")
+  @@index([user_id], map: "user_id_fk")
+}
+
+model Likes {
+  user_id Int
+  book_id Int
+  like_id Int @unique(map: "like_id") @default(autoincrement())
+
+  @@id([user_id, book_id])
+}
+
+model Punishment {
+  lending_id            Int
+  punishment_id         Int       @id @default(autoincrement())
+  punishment_start_date DateTime? @default(now()) @db.Timestamp(0)
+  punishment_end_date   DateTime? @db.Timestamp(0)
+  punishment_type       String?   @db.VarChar(25)
+  reason                String?   @db.VarChar(50)
+  Lending               Lending   @relation(fields: [lending_id], references: [lending_id], onDelete: Cascade, map: "lending_id_fk")
+
+  @@index([lending_id], map: "lending_id_fk")
+}
+
+model User {
+  user_id        Int       @id @default(autoincrement())
+  fullname       String    @db.VarChar(100)
+  username       String    @unique(map: "username") @db.VarChar(25)
+  password_key   String    @db.VarChar(255)
+  email          String   @unique(map: "email") @db.VarChar(255)
+  sex            String   @db.VarChar(10)
+  specialization String   @db.VarChar(50)
+  profile_picture String?
+  Lending        Lending[]
+}

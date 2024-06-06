@@ -7,6 +7,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        bgPageBlue: "#001637",
+        darkBlueCard: "#000105", // Example custom color
+        lightBlueCard: "#1369B8",
+        orangeCard: "#F05B3B",
+        whiteText: "#FFFFFF",
+        orangeTextBtn: "#F05B3B",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
