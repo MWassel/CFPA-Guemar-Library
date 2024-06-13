@@ -17,7 +17,7 @@ model Author {
 }
 
 model Book {
-  book_id          Int         @id @default(autoincrement())
+  book_id          String        @id @db.VarChar(25)
   author_id        Int
   book_title       String      @db.VarChar(100)
   publishing_year  Int?     
@@ -35,7 +35,7 @@ model Book {
 
 model Book_copy {
   copy_id Int       @id
-  book_id Int
+  book_id String    @db.VarChar(25)
   Book    Book      @relation(fields: [book_id], references: [book_id], onDelete: Cascade, map: "book_id_fk")
   Lending Lending[]
 
@@ -52,11 +52,12 @@ model Bookmarks {
 
 model Lending {
   copy_id            Int
-  user_id            Int
+  user_id            String
   lending_id         Int          @id @default(autoincrement())
   lending_start_date DateTime   @default(now()) @db.Timestamp(0)
   return_date        DateTime    @db.Timestamp(0)
-  landing_status     Boolean       @default(true)
+  return_status      Boolean       @default(true)
+  actual_return_date DateTime?   @db.Timestamp(0)
   Book_copy          Book_copy    @relation(fields: [copy_id], references: [copy_id], onDelete: NoAction, onUpdate: NoAction, map: "copy_id_fk")
   User               User         @relation(fields: [user_id], references: [user_id], onDelete: Cascade, map: "user_id_fk")
   Punishment         Punishment[]
@@ -66,8 +67,8 @@ model Lending {
 }
 
 model Likes {
-  user_id Int
-  book_id Int
+  user_id String
+  book_id String
   like_id Int @unique(map: "like_id") @default(autoincrement())
 
   @@id([user_id, book_id])
@@ -86,7 +87,7 @@ model Punishment {
 }
 
 model User {
-  user_id        Int       @id @default(autoincrement())
+  user_id        String       @id @db.VarChar(25)
   fullname       String    @db.VarChar(100)
   username       String    @unique(map: "username") @db.VarChar(25)
   password_key   String    @db.VarChar(255)

@@ -19,10 +19,12 @@ export default function BookSearchComp() {
   };
 
   return (
-    <div className=" w-1/4 flex flex-col rounded-3xl bg-darkBlueCard shadow-md p-4">
-      <div className="text-right text-white font-bold mr-1">إبحث عن كتاب</div>
+    <div className=" w-full h-48 flex flex-col flex-grow rounded-3xl bg-darkBlueCard shadow-md p-4 text-right">
+      <div className="text-right text-white font-bold mr-4 text-2xl m-2">
+        إبحث عن كتاب
+      </div>
       <input
-        className="w-full rounded-full px-4 py-2 mt-4 mb-6 focus:outline-none focus:ring-1 bg-gray-700 text-white"
+        className="w-full rounded-full px-4 p-2 self-center mt-16 focus:outline-none focus:ring-1 bg-gray-700 text-white"
         type="text"
         placeholder="Search"
         value={query}

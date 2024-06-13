@@ -9,7 +9,7 @@ export async function GET() {
 }
 export async function POST(req: NextRequest) {
   const data = await req.formData();
-
+  const userId = data.get("userId") as string;
   const fullname = data.get("fullname") as string;
   const username = data.get("username") as string;
   const password = data.get("password") as string;
@@ -29,6 +29,7 @@ export async function POST(req: NextRequest) {
 
   const user = await prisma.user.create({
     data: {
+      user_id: userId,
       fullname: fullname,
       username: username,
       password_key: password,
@@ -38,5 +39,11 @@ export async function POST(req: NextRequest) {
       profile_picture: path,
     },
   });
-  return NextResponse.json(user);
+  if (user) {
+    // Successful login
+    return NextResponse.json({ success: true });
+  } else {
+    // Invalid credentials
+    return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+  }
 }

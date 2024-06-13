@@ -5,14 +5,15 @@ import { writeFile } from "fs/promises";
 
 export async function POST(req: NextRequest) {
   const data = await req.formData();
+  const bookId = data.get("bookId") as string;
   const authorId = data.get("authorId") as string;
   const bookTitle = data.get("bookTitle") as string;
-  const publishingYear = data.get("PublishingYear") as string;
-  const pagesNumber = data.get("PagesNumber") as string;
+  const PublishingYear = data.get("PublishingYear") as string;
+  const PagesNumber = data.get("PagesNumber") as string;
   const publishingHouse = data.get("PublishingHouse") as string;
-  const aboutBook = data.get("AboutBook") as string;
+  const AboutBook = data.get("AboutBook") as string;
   const category = data.get("Category") as string;
-  const copysNumber = data.get("CopysNumber") as string;
+  const CopysNumber = data.get("CopysNumber") as string;
 
   const file = data.get("bookCover") as File;
   const bytes = await file.arrayBuffer();
@@ -20,16 +21,30 @@ export async function POST(req: NextRequest) {
   const path = join(process.cwd(), "public/uploads/book_covers", file.name);
   await writeFile(path, buffer);
 
+  console.log(
+    bookId,
+    authorId,
+    bookTitle,
+    PublishingYear,
+    PagesNumber,
+    publishingHouse,
+    AboutBook,
+    category,
+    CopysNumber,
+    path
+  );
+
   const book = await prisma.book.create({
     data: {
+      book_id: bookId,
       author_id: parseInt(authorId),
       book_title: bookTitle,
-      publishing_year: publishingYear ? parseInt(publishingYear) : null,
-      pages_number: pagesNumber ? parseInt(pagesNumber) : null,
+      publishing_year: PublishingYear ? parseInt(PublishingYear) : null,
+      pages_number: PagesNumber ? parseInt(PagesNumber) : null,
       publishing_house: publishingHouse,
-      about_book: aboutBook,
+      about_book: AboutBook,
       category: category,
-      copys_number: copysNumber ? parseInt(copysNumber) : null,
+      copys_number: CopysNumber ? parseInt(CopysNumber) : null,
       book_cover: path,
     },
   });
