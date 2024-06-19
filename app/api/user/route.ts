@@ -27,6 +27,8 @@ export async function POST(req: NextRequest) {
   );
   await writeFile(path, buffer);
 
+  const imageUrl = `uploads/profile_pictures/${File.name}`;
+
   const user = await prisma.user.create({
     data: {
       user_id: userId,
@@ -36,7 +38,7 @@ export async function POST(req: NextRequest) {
       email: email,
       sex: sex,
       specialization: specialization,
-      profile_picture: path,
+      profile_picture: imageUrl,
     },
   });
   if (user) {

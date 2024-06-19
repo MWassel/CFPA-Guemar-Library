@@ -8,11 +8,11 @@ import AdminDashboardCard from "../Components/adminDashboardCard";
 export default function AdminDashboard() {
   return (
     <>
-      <div className=" container mx-auto border-2 border-pink-600">
+      <div className=" container mx-auto">
         <div className=" grid grid-cols-3 sm:grid-cols-3 m-10 gap-8 mt-28">
-          <div className="flex flex-col col-span-2 w-full gap-8 border-2 border-green-500">
+          <div className="flex flex-col col-span-2 w-full gap-8">
             <AdminDashboardCard
-              title="books gallery"
+              title="معرض الكتب"
               link="/BookGallery"
               color="darkBlueCard"
             ></AdminDashboardCard>
@@ -22,7 +22,7 @@ export default function AdminDashboard() {
               color="orangeCard"
             ></AdminDashboardCard>
           </div>
-          <div className="flex flex-col col-span-1 w-full gap-8 border-2 border-yellow-400">
+          <div className="flex flex-col col-span-1 w-full gap-8">
             <AdminDashboardCard
               title="إدارة الكتب"
               link="/BookManagement"

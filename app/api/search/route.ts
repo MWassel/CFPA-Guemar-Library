@@ -10,12 +10,11 @@ export async function GET(req: NextRequest) {
         contains: query,
       },
     },
+    include: {
+      Author: true,
+    },
   });
-  const bookTitles = books.map((book) => ({
-    id: book.book_id,
-    title: book.book_title,
-  }));
-  return NextResponse.json(bookTitles, { status: 200 });
+  return NextResponse.json(books, { status: 200 });
 }
 
 /*

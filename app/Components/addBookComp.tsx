@@ -1,6 +1,7 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
+import OrangeBtnComp from "./orangeBtnComp";
 
 type bookInputs = {
   bookId: number;
@@ -51,74 +52,85 @@ export default function AddBookComp() {
     }
   };
   return (
-    <div>
-      <p>Add Book : </p>
+    <div className=" h-full w-full rounded-3xl bg-lightBlueCard shadow-md p-4 items-center">
+      <p className=" text-center font-bold text-2xl mt-4 mb-8 ">اضافة كتاب</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <input
+            className="w-full h-8 rounded-full px-4 py-2 mb-6 focus:outline-none focus:ring-1 bg-white text-black text-right"
             {...register("bookId", { required: true })}
             type="string"
             name="bookId"
             id=""
-            placeholder="Book Id"
+            placeholder="معرف الكتاب"
           />
         </div>
         <div>
           <input
+            className="w-full h-8 rounded-full py-2 mb-6 focus:outline-none focus:ring-1 bg-white text-black text-right"
             {...register("authorId", { required: true })}
             type="number"
             name="authorId"
             id=""
-            placeholder="Author Id"
+            placeholder="معرف المؤلف"
           />
         </div>
         <div>
           <input
+            className="w-full h-8 rounded-full px-4 py-2 mb-6 focus:outline-none focus:ring-1 bg-white text-black text-right"
             {...register("bookTitle", { required: true })}
             type="text"
             name="bookTitle"
             id=""
-            placeholder="Book Title"
+            placeholder="عنوان الكتاب"
           />
         </div>
 
         <div>
           <input
+            className="w-full h-8 rounded-full  py-2 mb-6 focus:outline-none focus:ring-1 bg-white text-black text-right"
             {...register("PublishingYear")}
             type="number"
             name="PublishingYear"
             id=""
-            placeholder="Publishing Year (optional)"
+            placeholder="سنة النشر (خياري)"
           />
         </div>
         <div>
           <input
+            className="w-full h-8 rounded-full py-2 mb-6 focus:outline-none focus:ring-1 bg-white text-black text-right"
             {...register("PagesNumber")}
             type="number"
             name="PagesNumber"
             id=""
-            placeholder="Pages Number (optional)"
+            placeholder="عدد الصفحات (خياري)"
           />
         </div>
 
         <input
+          className="w-full h-8 rounded-full px-4 py-2 mb-6 focus:outline-none focus:ring-1 bg-white text-black text-right"
           {...register("PublishingHouse")}
           type="text"
           name="PublishingHouse"
           id=""
-          placeholder=" Publishing House (optional)"
+          placeholder="دار النشر (خياري)"
         />
         <div>
           <input
+            className="w-full h-8 rounded-full px-4 py-2 mb-6 focus:outline-none focus:ring-1 bg-white text-black text-right"
             {...register("AboutBook")}
             type="text area"
             name="AboutBook"
             id=""
-            placeholder="About Book (optional)"
+            placeholder="نبذة عن الكتاب (خياري)"
           />
         </div>
         <div>
-          <select {...register("Category")}>
+          <select
+            {...register("Category")}
+            className="w-full h-9 rounded-full px-4 py-2 mb-6 focus:outline-none focus:ring-1 bg-white text-black text-right"
+            title="تصنيف الكتاب"
+          >
             <option value="رويات و قصص">رويات و قصص</option>
             <option value="آدب">آدب</option>
             <option value="رياضة">رياضة</option>
@@ -150,27 +162,28 @@ export default function AddBookComp() {
         </div>
         <div>
           <input
+            className="w-full h-8 rounded-full py-2 mb-6 focus:outline-none focus:ring-1 bg-white text-black text-right"
             {...register("CopysNumber")}
             type="number"
             name="CopysNumber"
             id=""
-            placeholder="Copy Number (optional)"
+            placeholder="عدد النسخ (خياري)"
           />
         </div>
-        <div>
+        <div className=" flex flex-col text-right w-full h-22 rounded-xl px-4 py-2 mb-6 focus:outline-none focus:ring-1 border-white border-2 border-dashed text-white ">
           <input
+            className=" file:rounded-3xl file:p-3 file:text-white file:bg-orangeCard file:cursor-pointer w-full h-16 rounded-full px-4 py-2 focus:outline-none focus:ring-1 file:border-none file:ml-7"
             {...register("bookCover")}
+            title="غلاف الكتاب"
             type="file"
             name="bookCover"
             id=""
             accept="image/*"
-            placeholder="Book Cover (optional)"
+            placeholder="غلاف الكتاب (خياري)"
           />
         </div>
 
-        <button disabled={isSubmitting} type="submit">
-          {isSubmitting ? "Loading" : "Add Book"}
-        </button>
+        <OrangeBtnComp isSubmitting={isSubmitting} />
       </form>
     </div>
   );

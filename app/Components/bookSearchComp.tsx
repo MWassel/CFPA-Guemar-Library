@@ -1,6 +1,9 @@
 import { useState } from "react";
+import MostPopularBooksComp from "./mostPopularBooksComp";
+import Image from "next/image";
 
-export default function BookSearchComp() {
+export default function BookSearchComp({ hight, width }) {
+  const [books, setBooks] = useState([]);
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
@@ -12,30 +15,45 @@ export default function BookSearchComp() {
         `http://localhost:3000/api/search?query=${query}`
       );
       const bookTitles = await response.json();
-      setSearchResults(bookTitles);
+      setBooks(bookTitles);
     } else {
-      setSearchResults([]);
+      setBooks([]);
     }
   };
 
   return (
-    <div className=" w-full h-48 flex flex-col flex-grow rounded-3xl bg-darkBlueCard shadow-md p-4 text-right">
-      <div className="text-right text-white font-bold mr-4 text-2xl m-2">
-        إبحث عن كتاب
-      </div>
+    <div
+      className={`w-${width} h-${hight} flex flex-col flex-grow rounded-3xl bg-darkBlueCard shadow-md p-4 text-center`}
+    >
       <input
-        className="w-full rounded-full px-4 p-2 self-center mt-16 focus:outline-none focus:ring-1 bg-gray-700 text-white"
+        className=" w-11/12 rounded-full px-4 p-2 self-center mt-6 mb-4 focus:outline-none focus:ring-1 bg-gray-700 text-white text-center"
         type="text"
-        placeholder="Search"
+        placeholder="...إبحث عن كتاب"
         value={query}
         onChange={handleSearch}
       />
-      {query && (
-        <ul className=" text-white">
-          {searchResults.map((book) => (
-            <li key={book.id}>{book.title}</li>
+      {query ? (
+        <div className="flex flex-wrap flex-grow justify-end mt-2">
+          {books.map((book) => (
+            <div
+              key={book.id}
+              className=" w-44 h-52 flex flex-col items-center justify-center mt-4 mr-2 "
+            >
+              <Image
+                src={"/" + book.book_cover}
+                width={120}
+                height={130}
+                alt={book.book_title}
+              />
+              <h3 className="text-white font-bold mt-2 text-sm">
+                {book.book_title}
+              </h3>
+              <p className=" text-white text-xs">{book.Author.author_name}</p>
+            </div>
           ))}
-        </ul>
+        </div>
+      ) : (
+        <MostPopularBooksComp />
       )}
     </div>
   );

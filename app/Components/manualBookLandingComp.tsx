@@ -1,5 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
+import OrangeBtnComp from "./orangeBtnComp";
 
 type landingInputs = {
   copyId: number;
@@ -34,36 +35,38 @@ export default function ManualBookLandingComp() {
   };
 
   return (
-    <div>
-      <h1>Book landing Manual</h1>
+    <div className=" h-full w-52 rounded-3xl bg-lightBlueCard shadow-md p-4 items-center">
+      <h1 className=" text-center font-bold text-2xl mt-4 mb-8 ">إعارة كتاب</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <input
+            className="w-full h-8 rounded-full px-4 py-2 mb-6 focus:outline-none focus:ring-1 bg-white text-black text-right"
             type="number"
             name="copyId"
-            placeholder="Enter copyId"
+            placeholder="رقم نسخة الكتاب"
             {...register("copyId", { required: true })}
           />
         </div>
         <div>
           <input
+            className="w-full h-8 rounded-full px-4 py-2 mb-6 focus:outline-none focus:ring-1 bg-white text-black text-right"
             type="number"
             name="userId"
-            placeholder="Enter userId"
+            placeholder="رقم الطالب"
             {...register("userId", { required: true })}
           />
         </div>
         <div>
           <input
+            className="w-full h-8 rounded-full px-4 py-2 mb-6 focus:outline-none focus:ring-1 bg-white text-black text-right"
+            title="تاريخ العودة"
             type="date"
             name="returnDate"
             placeholder="Enter returnDate"
             {...register("returnDate", { required: true })}
           />
         </div>
-        <button disabled={isSubmitting} type="submit">
-          {isSubmitting ? "Submitting..." : "Submit"}
-        </button>
+        <OrangeBtnComp isSubmitting={isSubmitting} />
       </form>
     </div>
   );

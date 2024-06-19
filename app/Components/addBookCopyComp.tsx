@@ -1,6 +1,7 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
+import OrangeBtnComp from "./orangeBtnComp";
 
 type bookCopyInputs = {
   copyId: number;
@@ -32,28 +33,29 @@ export default function AddBookCopyComp() {
     }
   };
   return (
-    <div>
+    <div className=" h-full w-full rounded-3xl bg-lightBlueCard shadow-md p-4 items-center">
+      <p className=" text-center font-bold text-2xl mt-40 mb-8 ">اضافة نسخة</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <input
+            className="w-full h-8 rounded-full py-2 mb-6 focus:outline-none focus:ring-1 bg-white text-black text-right"
             type="number"
             name="copyId"
             placeholder="
-            copyId"
+            معرف النسخة"
             {...register("copyId")}
           />
         </div>
         <div>
           <input
+            className="w-full h-8 rounded-full py-2 mb-6 focus:outline-none focus:ring-1 bg-white text-black text-right"
             type="number"
             name="bookId"
-            placeholder="bookId"
+            placeholder="معرف الكتاب"
             {...register("bookId")}
           />
         </div>
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Submitting..." : "Submit"}
-        </button>
+        <OrangeBtnComp isSubmitting={isSubmitting} />
       </form>
     </div>
   );
