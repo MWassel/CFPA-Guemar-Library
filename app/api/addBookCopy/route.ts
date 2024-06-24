@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
   const bookCopy = await prisma.book_copy.create({
     data: {
       copy_id: parseInt(copyId),
-      book_id: parseInt(bookId),
+      book_id: bookId,
     },
   });
   return NextResponse.json({ success: true });

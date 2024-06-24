@@ -1,8 +1,3 @@
-"use client";
-import AddAuthorComp from "../Components/addAuthorComp";
-import AddBookComp from "../Components/addBookComp";
-import ManualBookLandingComp from "../Components/manualBookLandingComp";
-import AddBookCopyComp from "../Components/addBookCopyComp";
 import AdminDashboardCard from "../Components/adminDashboardCard";
 
 export default function AdminDashboard() {
@@ -17,7 +12,7 @@ export default function AdminDashboard() {
               color="darkBlueCard"
             ></AdminDashboardCard>
             <AdminDashboardCard
-              title="لوحة التحكم"
+              title="إدارة المستخدمين"
               link="/ControlPanel"
               color="orangeCard"
             ></AdminDashboardCard>

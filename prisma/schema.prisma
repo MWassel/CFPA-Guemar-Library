@@ -27,7 +27,7 @@ model Book {
   category         String?     @db.VarChar(25)
   copys_number     Int?
   book_cover       String?     @db.VarChar(255)
-  Author           Author      @relation(fields: [author_id], references: [author_id], onDelete: Cascade, map: "auther_id_fk")
+  Author           Author      @relation(fields: [author_id], references: [author_id], onDelete: NoAction, onUpdate: NoAction, map: "auther_id_fk")
   Book_copy        Book_copy[]
 
   @@index([author_id], map: "auther_id_fk")
@@ -36,7 +36,7 @@ model Book {
 model Book_copy {
   copy_id Int       @id
   book_id String    @db.VarChar(25)
-  Book    Book      @relation(fields: [book_id], references: [book_id], onDelete: Cascade, map: "book_id_fk")
+  Book    Book      @relation(fields: [book_id], references: [book_id], onDelete: NoAction, onUpdate: NoAction, map: "book_id_fk")
   Lending Lending[]
 
   @@index([book_id], map: "book_id_fk")
@@ -59,7 +59,7 @@ model Lending {
   return_status      Boolean       @default(true)
   actual_return_date DateTime?   @db.Timestamp(0)
   Book_copy          Book_copy    @relation(fields: [copy_id], references: [copy_id], onDelete: NoAction, onUpdate: NoAction, map: "copy_id_fk")
-  User               User         @relation(fields: [user_id], references: [user_id], onDelete: Cascade, map: "user_id_fk")
+  User               User         @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "user_id_fk")
   Punishment         Punishment[]
 
   @@index([copy_id], map: "copy_id_fk")
@@ -81,7 +81,7 @@ model Punishment {
   punishment_end_date   DateTime? @db.Timestamp(0)
   punishment_type       String?   @db.VarChar(25)
   reason                String?   @db.VarChar(50)
-  Lending               Lending   @relation(fields: [lending_id], references: [lending_id], onDelete: Cascade, map: "lending_id_fk")
+  Lending               Lending   @relation(fields: [lending_id], references: [lending_id], onDelete: NoAction, onUpdate: NoAction, map: "lending_id_fk")
 
   @@index([lending_id], map: "lending_id_fk")
 }
