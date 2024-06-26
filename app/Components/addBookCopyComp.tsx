@@ -34,7 +34,7 @@ export default function AddBookCopyComp() {
   };
   return (
     <div className=" h-full w-full rounded-3xl bg-lightBlueCard shadow-md p-4 items-center">
-      <p className=" text-center font-bold text-2xl mt-40 mb-8 ">اضافة نسخة</p>
+      <p className=" text-center font-bold text-2xl mt-4 mb-8 ">اضافة نسخة</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <input

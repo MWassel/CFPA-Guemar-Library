@@ -7,9 +7,9 @@ export default function ModifyData() {
     <>
       <div className="container mx-auto">
         <div className=" grid grid-cols-3 sm:grid-cols-3 m-10 mt-28 gap-4">
-          <AlterAutherComp />
-          <AlterBooksComp />
           <AlterBookCopyComp />
+          <AlterBooksComp />
+          <AlterAutherComp />
         </div>
       </div>
     </>

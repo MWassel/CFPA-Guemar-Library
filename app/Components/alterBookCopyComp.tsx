@@ -39,12 +39,14 @@ export default function AlterBookCopyComp() {
   }, []);
   return (
     <>
-      <div className=" flex flex-col col-span-1 bg-darkBlueCard w-full h-full text-white">
+      <div className=" h-full w-full rounded-3xl bg-darkBlueCard text-white shadow-md p-4 items-center">
+        <p className=" text-center font-bold text-2xl mt-4 mb-8 ">نسخ الكتب</p>
         {bookcopys.map((bookcopy) => (
           <ul key={bookcopy.copy_id}>
             <li>
-              {bookcopy.copy_id} by {bookcopy.book_id}
               <div className="flex flex-row gap-2">
+                رقم النسخة : {bookcopy.copy_id} - معرف الكتاب :{" "}
+                {bookcopy.book_id}
                 {/* <button
                   className=" text-green-600"
                   onClick={() => handleEditClick(bookcopy.copy_id)}

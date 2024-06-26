@@ -45,12 +45,13 @@ export default function AlterAutherComp() {
   }, []);
   return (
     <>
-      <div className=" flex flex-col col-span-1 bg-darkBlueCard w-full h-full text-white">
+      <div className=" h-full w-full rounded-3xl bg-darkBlueCard text-white shadow-md p-4 items-center">
+        <p className=" text-center font-bold text-2xl mt-4 mb-8 ">المؤلفين</p>
         {authers.map((authers) => (
           <ul key={authers.author_id}>
             <li>
-              {authers.author_name} - {authers.author_nationality}
               <div className="flex flex-row gap-2">
+                {authers.author_name} - {authers.author_nationality}
                 <button
                   className=" text-green-600"
                   onClick={() => handleEditClick(authers.author_id)}

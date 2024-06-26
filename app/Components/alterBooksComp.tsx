@@ -39,11 +39,12 @@ export default function AlterBooksComp() {
   }, []);
   return (
     <>
-      <div className=" flex flex-col col-span-1 bg-darkBlueCard w-full h-full text-white">
+      <div className=" h-full w-full rounded-3xl bg-darkBlueCard text-white shadow-md p-4 items-center">
+        <p className=" text-center font-bold text-2xl mt-4 mb-8 ">الكتب</p>
         {books.map((book) => (
           <ul key={book.book_id}>
             <li>
-              {book.book_title} by {book.Author.author_name}
+              {book.book_title} - {book.Author.author_name}
               <div className="flex flex-row gap-2">
                 <button
                   className=" text-green-600"

@@ -56,7 +56,7 @@ model Lending {
   lending_id         Int          @id @default(autoincrement())
   lending_start_date DateTime   @default(now()) @db.Timestamp(0)
   return_date        DateTime    @db.Timestamp(0)
-  return_status      Boolean       @default(true)
+  return_status      String       @default("Not Returned")
   actual_return_date DateTime?   @db.Timestamp(0)
   Book_copy          Book_copy    @relation(fields: [copy_id], references: [copy_id], onDelete: NoAction, onUpdate: NoAction, map: "copy_id_fk")
   User               User         @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "user_id_fk")
